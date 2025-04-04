@@ -318,26 +318,6 @@ h6, .h6 { font-size: 1rem; }
 
 /* How Section */
 
-#how .row {
-    justify-content: center;
-    margin-top: 3rem;
-}
-
-#how .col-md {
-    max-width: 500px;
-    margin: 0 1rem;
-    padding: 2rem;
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-}
-
-#how .col-md:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
 #how h4 {
     color: #2c3e50;
     margin-bottom: 1.5rem;
@@ -349,12 +329,36 @@ h6, .h6 { font-size: 1rem; }
 }
 
 /* Before & After Section */
+
 #before-after .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    column-gap: 1rem;
+    width: auto;
+    margin-left: 12%;
+    margin-right: 12%;
 }
 
+#before-after .col-md {
+    background-color: #ffffff;
+    border-radius: 2rem;
+}
+
+#before-after .col-md:hover{
+    transform: translateY(-0.5rem);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+#before-after .grid h4 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+}
+
+#before-after .grid td {
+    padding: 0.5rem;
+}
 
 /* Team Section */
 .team-member {
