@@ -136,8 +136,8 @@ h6, .h6 { font-size: 1rem; }
     position: absolute;
     top: 0;
     z-index: 2;
-    padding: 5rem 0;
-    width: 50%;
+    padding: 1rem 0;
+    width: 90%;
 }
 
 .navbar-nav {
@@ -191,7 +191,7 @@ h6, .h6 { font-size: 1rem; }
 
 /* Masthead Section */
 .masthead {
-    background: linear-gradient(0deg, #3d3c4b 0%, #87CEEB 100%);
+    background: linear-gradient(0deg, #d7e2f0 0%, #edf1f3 100%);
     backdrop-filter: blur(10px);
     position: relative;
     z-index: 1;
@@ -202,7 +202,7 @@ h6, .h6 { font-size: 1rem; }
     justify-content: center;
     text-align: center;
     padding: 0;
-    margin-top: 1rem;
+    margin-top: 0rem;
     overflow: hidden;
 }
 
@@ -364,8 +364,8 @@ h6, .h6 { font-size: 1rem; }
 }
 
 #why-kinople .table-heading {
-    width: 20%;
-    text-align: right;
+    width: 35%;
+    text-align: center;
 }
 
 /* Responsive Design */
