@@ -135,21 +135,38 @@ h6, .h6 { font-size: 1rem; }
     background: transparent !important;
     position: absolute;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 2;
     padding: 1rem 0;
-    width: 90%;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+    flex-grow: 1;
+    justify-content: flex-end;
 }
 
 .navbar-nav {
     display: flex;
     flex-direction: row !important;
     align-items: center;
-    margin: 0 auto;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
     padding: 0;
     list-style: none;
-    width: auto;
-    justify-content: left;
-    gap: 2rem;
 }
 
 .nav-item {
@@ -166,7 +183,6 @@ h6, .h6 { font-size: 1rem; }
     text-decoration: none;
     padding: 0.5rem 1rem;
     font-size: 1.1rem;
-    text-align: right;
 }
 
 .nav-link:hover {
@@ -187,6 +203,26 @@ h6, .h6 { font-size: 1rem; }
 
 .nav-link:hover::after {
     width: 100%;
+}
+
+/* Special styling for WebApp link */
+.webapp-link .nav-link {
+    background: linear-gradient(135deg, #6d9ed6 0%, #4a90e2 100%);
+    color: white !important;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(109, 158, 214, 0.3);
+}
+
+.webapp-link .nav-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(109, 158, 214, 0.4);
+    color: white !important;
+}
+
+.webapp-link .nav-link::after {
+    display: none;
 }
 
 /* Masthead Section */
