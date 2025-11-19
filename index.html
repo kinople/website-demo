@@ -1,153 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Virtual ADs for Film & TV Productions" />
-        <meta name="author" content="Aditya Ravindran" />
-        <title>Kinople - Intelligent Production Assistant</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Custom CSS -->
-        <link href="css/custom.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <!-- Masthead-->
-        <header class="masthead" id="hero">
-            <!-- Navigation-->
-            <div class = "navbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#hero"><h1>Kinople</h1></a></li>
-                    <li class="nav-item webapp-link"><a class="nav-link" href="https://kinople.github.io/webapp-frontend/#">Get Started</a></li>
-                </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinople - Pre-Production Companion for Film & TV Productions</title>
+    <meta name="description" content="Supercharge your productions by preparing breakdowns, schedules, call sheets and production reports at the click of a button">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #6b7280;
+            background: #ffffff;
+        }
+
+        /* Color Variables */
+        :root {
+            --primary: #6c5ce7;
+            --accent: #00b894;
+            --foreground: #6b7280;
+            --background: #ffffff;
+            --muted: #f5f5f5;
+            --border: #e5e5e5;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--foreground);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 40px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #5f4fdb;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--foreground);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #ffffff, #f5f5f5);
+            padding: 6rem 1.5rem 4rem;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text {
+            color: #374151;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--foreground);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 1.5rem;
+        }
+
+        .section-bg {
+            background: linear-gradient(180deg, #ffffff, #f5f5f5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--foreground);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #fafafa, #f5f5f5);
+            border: 1px solid rgba(229, 229, 229, 0.5);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            box-shadow: 0 0 40px rgba(108, 92, 231, 0.3);
+        }
+
+        .card-icon {
+            width: 4rem;
+            height: 4rem;
+            background: rgba(108, 92, 231, 0.2);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        .card p {
+            color: var(--foreground);
+        }
+
+        /* How It Works */
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .step-card {
+            background: linear-gradient(145deg, #fafafa, #f5f5f5);
+            border: 1px solid rgba(229, 229, 229, 0.5);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .step-card:hover {
+            box-shadow: 0 0 40px rgba(108, 92, 231, 0.3);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-icon {
+            background: rgba(108, 92, 231, 0.2);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .step-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .step-details {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .step-details li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+        }
+
+        .step-details li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* CTA Section */
+        .cta-card {
+            background: linear-gradient(145deg, #fafafa, #f5f5f5);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            border-radius: 1rem;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(108, 92, 231, 0.3);
+        }
+
+        .cta-card h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #374151;
+        }
+
+        .cta-card p {
+            font-size: 1.25rem;
+            color: var(--foreground);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--foreground);
+        }
+
+        .feature-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--background);
+            border-top: 1px solid var(--border);
+            padding: 4rem 1.5rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--foreground);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .badge {
+            background: rgba(108, 92, 231, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--foreground);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .cta-card h2 {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .how-it-works-grid {
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-icon {
+            position: absolute;
+            opacity: 0.2;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .icon-1 { top: 5rem; left: 5%; animation-delay: 0s; }
+        .icon-2 { top: 10rem; right: 10%; animation-delay: 0.5s; }
+        .icon-3 { bottom: 15rem; left: 10%; animation-delay: 1s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Kinople</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <div>
+                <a href="https://kinople.github.io/webapp-frontend/#" class="btn btn-primary">Get Started</a>
             </div>
-            <div class="container">
-                <div class="masthead-heading text-uppercase">Pre-Production Companion for<br>Film & TV Productions</div>
-                <div class="masthead-subheading">Supercharge your productions by preparing breakdowns, schedules, call sheets and production reports at the click of a button and save 1000+ hours of your direction team.</div> 
-                <!-- Calendly link widget begin -->
-                <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-                <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-                <a class="btn-primary text-uppercase" href="https://cal.com/sujith-kumar/product-demo-w-kinople" target="_blank">Book Demo</a>
-                <!-- Calendly link widget end -->
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-icon icon-1" style="font-size: 2.5rem;">🎬</div>
+        <div class="floating-icon icon-2" style="font-size: 3.5rem;">📹</div>
+        <div class="floating-icon icon-3" style="font-size: 3rem;">🎥</div>
+        
+        <div class="hero-content">
+            <h1>
+                <span class="gradient-text">Pre-Production</span><br>
+                <span class="hero-text">Companion for Film</span><br>
+                <span class="hero-text">& TV Productions</span>
+            </h1>
+            <p>
+                Supercharge your productions by preparing breakdowns, schedules, call sheets 
+                and production reports at the click of a button and save 1000+ hours of your direction team.
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="https://kinople.github.io/webapp-frontend/#" class="btn btn-primary">Get Started Free</a>
+                <a href="https://cal.com/sujith-kumar/product-demo-w-kinople" target="_blank" class="btn btn-outline">▶ Watch Demo</a>
             </div>
-        </header>
-        <!-- How Does it Work-->
-        <section class="page-section" id="how">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">How It Works</h2>
-                    <h3 class="section-subheading text-muted">Kinople simplifies film & TV prodution logistics so you can focus on creativity.</h3>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">1000+</div>
+                    <div>Hours Saved</div>
                 </div>
-                <div class="grid">
-                    <div class="col-md">
-                        <table align="center">
-                            <tr><td><img src="assets/img/how/script.png" alt="script" width="50" height="50" /></td></tr>
-                            <tr><td><h5>Upload Script</h5></td></tr>
-                            <tr><td>Generate detailed script breakdown of all scenes in a minute</td></tr>
-                        </table>
+                <div class="stat">
+                    <div class="stat-number">100+</div>
+                    <div>Scene Breakdowns</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">15+</div>
+                    <div>Elements Tracked</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose <span class="gradient-text">Kinople</span>?</h2>
+                <p>Kinople simplifies film & TV production logistics so you can focus on creativity.<br>
+                Built for seamless production management from start to finish.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">⏱️</div>
+                    <h3>Save 1000+ Hours</h3>
+                    <p>Automate repetitive pre-production tasks and focus on creativity</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📄</div>
+                    <h3>Instant Script Breakdown</h3>
+                    <p>Generate detailed scene breakdowns with 15+ elements in under a minute</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📅</div>
+                    <h3>Smart Scheduling</h3>
+                    <p>AI-optimized schedules that consider cast, locations, and budget constraints</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h3>Cast Management</h3>
+                    <p>Track availability, resolve conflicts, and optimize shooting days</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Production Reports</h3>
+                    <p>Automated daily reports with progress tracking and insights</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⬇️</div>
+                    <h3>Multiple Export Formats</h3>
+                    <p>Export to PDF, CSV, Excel, or integrate with your existing tools</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3>Real-time Collaboration</h3>
+                    <p>Work together with your team and sync changes instantly</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Secure & Reliable</h3>
+                    <p>Enterprise-grade security with 99.9% uptime guarantee</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Process complex productions in seconds, not hours</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem;">
+                <div class="card" style="max-width: 1000px; margin: 0 auto;">
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Central Hub for All Production Paperwork</h3>
+                    <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">
+                        Maintain all production-specific paperwork in one place. Work faster together 
+                        with your team and keep everyone synchronized throughout the production lifecycle.
+                    </p>
+                    <div class="badge-grid">
+                        <span class="badge">Script Breakdowns</span>
+                        <span class="badge">Shooting Schedules</span>
+                        <span class="badge">Call Sheets</span>
+                        <span class="badge">Production Reports</span>
+                        <span class="badge">Cast Management</span>
                     </div>
-                    <div class="col-md">
-                        <table align="center">
-                            <tr><td><img src="assets/img/how/cast.png" alt="script" width="50" height="50" /></td></tr>
-                            <tr><td><h5>Update Cast & Locations</h5></td></tr>
-                            <tr><td>Get a schedule optimized for time and budget</td></tr>
-                        </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>How <span class="gradient-text">Kinople</span> Works</h2>
+                <p>Streamline your entire pre-production workflow with our intelligent automation</p>
+            </div>
+
+            <div class="how-it-works-grid">
+                <div>
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-icon">📤</div>
+                            <div class="step-content">
+                                <h3>1. Upload Script</h3>
+                                <p>Generate detailed script breakdown of all scenes in a minute</p>
+                            </div>
+                        </div>
+                        <ul class="step-details">
+                            <li>Generate 100+ scene breakdowns with 15+ elements in under a minute</li>
+                            <li>Edit and customize each breakdown directly in the dashboard</li>
+                            <li>Export breakdowns in PDF, CSV, or Excel formats</li>
+                        </ul>
                     </div>
-                    <div class="col-md">
-                        <table align="center">
-                            <tr><td><img src="assets/img/how/dpr.png" alt="script" width="50" height="50" /></td></tr>
-                            <tr><td><h5>Upload Production Report</h5></td></tr>
-                            <tr><td>Get schedule and call sheets of subsequent shoot days</td></tr>
-                        </table>
+
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-icon">👥</div>
+                            <div class="step-content">
+                                <h3>2. Update Cast & Locations</h3>
+                                <p>Get a schedule optimized for time and budget</p>
+                            </div>
+                        </div>
+                        <ul class="step-details">
+                            <li>Assign cast members to scenes and reserve locations</li>
+                            <li>Automatically optimize for time and budget efficiency</li>
+                            <li>Review and resolve availability conflicts in real-time</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-icon">📅</div>
+                            <div class="step-content">
+                                <h3>3. Generate Schedules</h3>
+                                <p>Get schedule and call sheets of subsequent shoot days</p>
+                            </div>
+                        </div>
+                        <ul class="step-details">
+                            <li>Select dates to get optimized schedules with smart suggestions</li>
+                            <li>Put schedules and call sheets on auto-pilot</li>
+                            <li>Automatically track production progress and adjust plans</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <div style="background: linear-gradient(135deg, rgba(108, 92, 231, 0.2), rgba(0, 184, 148, 0.2)); padding: 2rem; border-radius: 1rem; text-align: center;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🎬</div>
+                        <h3 style="font-size: 1.5rem; color: #374151; margin-bottom: 0.5rem;">Dashboard Preview</h3>
+                        <p>All your production tools in one place</p>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Before & After-->
-        <section class="page-section" id="before-after">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Before & After</h2>
-                    <h3 class="section-subheading text-muted">Struggling with Production chaos? Kinople is here to help!</h3>
+
+            <div class="card" style="max-width: 1000px; margin: 0 auto;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">
+                    From Script to Screen in <span style="color: var(--accent);">Minutes</span>
+                </h3>
+                <p style="font-size: 1.125rem;">
+                    From script breakdown of 1st draft to daily production reports of last shoot day, 
+                    we've got you covered with seamless production management.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-bg">
+        <div class="container">
+            <div class="cta-card">
+                <h2>
+                    Ready to Transform Your<br>
+                    <span class="gradient-text">Production Workflow?</span>
+                </h2>
+                <p>
+                    Join hundreds of production teams already saving thousands of hours 
+                    with Kinople's intelligent pre-production automation.
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="https://kinople.github.io/webapp-frontend/#" class="btn btn-primary">Start Free Trial →</a>
+                    <a href="https://cal.com/sujith-kumar/product-demo-w-kinople" target="_blank" class="btn btn-outline">▶ Book a Demo</a>
                 </div>
-                <div class="grid">
-                    <div class="col-md">
-                        <h4 class="my-3">&#10060 Without Kinople</h4>
-                        <table align="center">
-                            <tr>
-                                <td><img src="assets/img/before_and_after/x.png" alt="x" width="20" height="25" /></td>
-                                <td style="text-align: left;">Reading each scene repeatedly to create script breakdowns results in days of extra work</td>
-                            </tr>
-                            <tr>
-                                <td><img src="assets/img/before_and_after/x.png" alt="x" width="20" height="25" /></td>
-                                <td style="text-align: left;">Juggle cast and location dates, piecing it together solely by availability</td>
-                            </tr>
-                            <tr>
-                                <td><img src="assets/img/before_and_after/x.png" alt="x" width="20" height="25" /></td>
-                                <td style="text-align: left;">Manually track shoot progress to update future schedules and call sheets</td>
-                            </tr>
-                        </table> 
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="feature-dot"></div>
+                        <span>No credit card required</span>
                     </div>
-                    <div class="col-md">
-                        <h4 class="my-3">&#x2705 With Kinople</h4>
-                        <table align="center">
-                            <tr>
-                                <td><img src="assets/img/before_and_after/tick.png" alt="tick" width="20" height="25" /></td>
-                                <td style="text-align: left;">Generate 100+ scene breakdowns with 15+ elements in under a minute</td>
-                            </tr>
-                            <tr>
-                                <td><img src="assets/img/before_and_after/tick.png" alt="tick" width="20" height="25" /></td>
-                                <td style="text-align: left;">Select dates to get an optimized schedule with smart suggestions for efficient resource use</td>
-                            </tr>
-                            <tr>
-                                <td><img src="assets/img/before_and_after/tick.png" alt="tick" width="20" height="25" /></td>
-                                <td style="text-align: left;">Put schedules and call sheets on auto-pilot, by only updating daily production reports</td>
-                            </tr>
-                        </table> 
+                    <div class="feature-item">
+                        <div class="feature-dot"></div>
+                        <span>14-day free trial</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-dot"></div>
+                        <span>Cancel anytime</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-dot"></div>
+                        <span>24/7 support</span>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Seamless Production Management-->
-        <section class="page-section bg-light" id="seamless">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Built for seamless production management</h2>
-                    <h3 class="section-subheading text-muted">From script breakdown of 1st draft to daily production reports of last shoot day, we've got you covered!</h3>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="logo" style="margin-bottom: 1rem;">Kinople</div>
+                    <p>Pre-production companion for film & TV productions. Streamline your workflow and focus on creativity.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How it Works</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
                 </div>
             </div>
-        </section>
-        <!-- Why Choose Kinople-->
-        <section class="page-section" id="why-kinople">
-            <table align="center" class = "table-container">
-                <tr>
-                    <td class = "table-heading"><h1 class="section-heading mb-5">Why Choose Kinople?</h1></td>
-                    <td style="text-align: left;">
-                        <p><i class="fas fa-check-circle me-2"></i>  Central place to maintain all production-specific paperwork</p>
-                        <p><i class="fas fa-check-circle me-2"></i>  Work faster and together in one single workspace</p>
-                        <p><i class="fas fa-check-circle me-2"></i>  Integrate and automate all workflows of creative logistics management, end-to-end</p>
-                    </td>
-                </tr>
-            </table>
-        </section>
-        <section class="page-section" id="questions">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Interested in adding a Virtual AD to your crew?</h2>
-                </div>
-                <br />
-                <a class="btn-primary text-uppercase" href="https://cal.com/sujith-kumar/product-demo-w-kinople" target="_blank">Talk to Founder</a>
-            </div>
-        </section>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
+
+        </div>
+    </footer>
+</body>
 </html>
