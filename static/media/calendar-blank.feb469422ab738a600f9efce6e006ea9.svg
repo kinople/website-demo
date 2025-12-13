@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="CalendarBlank" clip-path="url(#clip0_0_59)">
+<g id="Vector">
+</g>
+<path id="Vector_2" d="M29.2502 5.62499H6.7502C6.12888 5.62499 5.6252 6.12867 5.6252 6.74999V29.25C5.6252 29.8713 6.12888 30.375 6.7502 30.375H29.2502C29.8715 30.375 30.3752 29.8713 30.3752 29.25V6.74999C30.3752 6.12867 29.8715 5.62499 29.2502 5.62499Z" stroke="var(--stroke-0, #DEDEDE)" stroke-width="1.66997" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M24.7501 3.37504V7.87504" stroke="var(--stroke-0, #DEDEDE)" stroke-width="1.66997" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M11.2499 3.37504V7.87504" stroke="var(--stroke-0, #DEDEDE)" stroke-width="1.66997" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M5.6252 12.375H30.3752" stroke="var(--stroke-0, #DEDEDE)" stroke-width="1.66997" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_0_59">
+<rect width="36" height="36" fill="white"/>
+</clipPath>
+</defs>
+</svg>
