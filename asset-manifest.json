@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.081d41fc.css",
+    "main.css": "/static/css/main.a00a13da.css",
     "main.js": "/static/js/main.53cd6d60.js",
     "static/media/hero-bg.png": "/static/media/hero-bg.d0448d4f21d8930b1992.png",
     "static/media/microsoft-excel-logo.svg": "/static/media/microsoft-excel-logo.b44900837b11610afd658173836d7668.svg",
@@ -13,11 +13,11 @@
     "static/media/shuffle-simple.svg": "/static/media/shuffle-simple.50f397708af7a06f37470f701f1c76aa.svg",
     "static/media/check.svg": "/static/media/check.def7391a1032e35cea2d5690403e726d.svg",
     "static/media/logo-vector.svg": "/static/media/logo-vector.c3a602f665fe8e4b1a8054b26cfc880f.svg",
-    "main.081d41fc.css.map": "/static/css/main.081d41fc.css.map",
+    "main.a00a13da.css.map": "/static/css/main.a00a13da.css.map",
     "main.53cd6d60.js.map": "/static/js/main.53cd6d60.js.map"
   },
   "entrypoints": [
-    "static/css/main.081d41fc.css",
+    "static/css/main.a00a13da.css",
     "static/js/main.53cd6d60.js"
   ]
 }
